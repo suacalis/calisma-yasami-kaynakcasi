@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Türkiye Çalışma Yaşamı Kaynakçası — Arama</title>
+<meta name="description" content="Canan Koç ve Yıldırım Koç'un Türkiye Çalışma Yaşamı Kaynakçası (2004) için APA 7 biçimli, Türkçe duyarlı arama motoru.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%23a8321a%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2218%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f0; --panel:#ffffff; --ink:#1d1f23; --ink2:#454952; --mute:#737780; --line:#e2ddd3;
+  --acc:#a8321a; --acc-soft:#f6e3dc; --mark:#ffe8a3; --chip:#efeae0; --focus:#1f5fbf;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#141518; --panel:#1c1e22; --ink:#ebe8e2; --ink2:#c3c0ba; --mute:#8f939b; --line:#2e3137;
+    --acc:#ec8a67; --acc-soft:#3a2620; --mark:#6b5410; --chip:#26292e; --focus:#7fb0ff; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141518; --panel:#1c1e22; --ink:#ebe8e2; --ink2:#c3c0ba; --mute:#8f939b; --line:#2e3137;
+  --acc:#ec8a67; --acc-soft:#3a2620; --mark:#6b5410; --chip:#26292e; --focus:#7fb0ff; --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--acc)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line);background:var(--panel)}
+header .wrap{display:flex;gap:16px;align-items:flex-end;justify-content:space-between;padding-top:22px;padding-bottom:16px;flex-wrap:wrap}
+h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.65rem;line-height:1.2;margin:0}
+.lede{color:var(--mute);margin:4px 0 0;font-size:.93rem;max-width:720px}
+.hdr-actions{display:flex;gap:8px;align-items:center}
+.iconbtn{background:transparent;border:1px solid var(--line);color:var(--ink2);border-radius:8px;padding:6px 10px;cursor:pointer;font:inherit;font-size:.85rem}
+.iconbtn:hover{border-color:var(--acc);color:var(--acc)}
+
+.searchbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.searchbar .wrap{padding-top:12px;padding-bottom:12px;display:grid;grid-template-columns:1fr auto;gap:8px}
+.q{position:relative}
+.q input{width:100%;font:inherit;font-size:1.02rem;padding:12px 40px 12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+.q input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+.q input:focus{border-color:var(--focus);outline:none}
+.q .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--mute);font-size:1.2rem;cursor:pointer;display:none}
+select,input[type=number]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+.hint{grid-column:1/-1;color:var(--mute);font-size:.8rem}
+.hint code{background:var(--chip);padding:1px 5px;border-radius:4px;font-size:.78rem}
+
+.layout{display:grid;grid-template-columns:260px 1fr;gap:24px;padding-top:20px;padding-bottom:60px}
+aside{font-size:.9rem}
+aside h3{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:18px 0 8px;font-weight:600}
+aside h3:first-child{margin-top:0}
+.letters{display:flex;flex-wrap:wrap;gap:4px}
+.letters button{min-width:30px;height:30px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);border-radius:6px;cursor:pointer;font:inherit;font-size:.85rem;padding:0 6px}
+.letters button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.letters button:disabled{opacity:.35;cursor:not-allowed}
+.facet label{display:flex;align-items:center;gap:8px;padding:3px 0;cursor:pointer;color:var(--ink2)}
+.facet label span.n{margin-left:auto;color:var(--mute);font-variant-numeric:tabular-nums;font-size:.8rem}
+.facet input{accent-color:var(--acc)}
+.yr{display:flex;gap:6px;align-items:center}
+.yr input{width:100%;padding:7px}
+.reset{margin-top:16px;width:100%}
+#hist{width:100%;height:70px;display:block;margin-top:6px}
+
+.meta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.count{font-size:.95rem;color:var(--ink2)}
+.count b{color:var(--ink);font-variant-numeric:tabular-nums}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.btn{border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;padding:7px 12px;font:inherit;font-size:.85rem;font-weight:500;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--acc)}
+.btn:hover{filter:brightness(1.05)}
+
+ol.results{list-style:none;margin:0;padding:0}
+.rec{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow)}
+.apa{font-family:"Source Serif 4",Georgia,serif;font-size:1.02rem;line-height:1.5;padding-left:1.6em;text-indent:-1.6em;margin:0}
+.apa i{font-style:italic}
+mark{background:var(--mark);color:inherit;border-radius:2px;padding:0 1px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.b{font-size:.74rem;background:var(--chip);color:var(--ink2);border-radius:999px;padding:2px 9px;white-space:nowrap}
+.b.t{background:var(--acc-soft);color:var(--acc)}
+.recact{margin-left:auto;display:flex;gap:4px}
+.recact button,.recact a{font:inherit;font-size:.78rem;border:0;background:transparent;color:var(--mute);cursor:pointer;padding:3px 6px;border-radius:6px;text-decoration:none}
+.recact button:hover,.recact a:hover{color:var(--acc);background:var(--chip)}
+details.raw{margin-top:8px;font-size:.84rem;color:var(--ink2)}
+details.raw summary{cursor:pointer;color:var(--mute);font-size:.78rem}
+dl.fields{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:8px 0 0}
+dl.fields dt{color:var(--mute)}
+dl.fields dd{margin:0}
+.empty{text-align:center;color:var(--mute);padding:50px 10px}
+.pager{display:flex;justify-content:center;gap:6px;margin-top:18px;flex-wrap:wrap}
+.pager button{min-width:38px;height:36px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);border-radius:8px;cursor:pointer;font:inherit}
+.pager button[aria-current="page"]{background:var(--acc);color:#fff;border-color:var(--acc)}
+.pager button:disabled{opacity:.4;cursor:default}
+footer{border-top:1px solid var(--line);color:var(--mute);font-size:.82rem;padding:20px 0 40px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:.88rem;opacity:0;transition:.2s;pointer-events:none;z-index:20}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.filtersToggle{display:none}
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr}
+  aside{display:none;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+  aside.open{display:block}
+  .filtersToggle{display:inline-block}
+  .searchbar .wrap{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div>
+      <h1>Türkiye Çalışma Yaşamı Kaynakçası</h1>
+      <p class="lede">Canan Koç ve Yıldırım Koç'un derlediği kaynakçanın (2004) APA 7 biçimli, aranabilir sürümü. Sendika, işçi sınıfı, çalışma hukuku ve sosyal güvenlik yayınları.</p>
+    </div>
+    <div class="hdr-actions">
+      <a class="iconbtn" href="data/kaynakca_apa7.csv" download>Tüm veri (CSV)</a>
+      <button class="iconbtn" id="theme" aria-label="Tema değiştir">◐ Tema</button>
+    </div>
+  </div>
+</header>
+
+<div class="searchbar">
+  <div class="wrap">
+    <div class="q">
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Ara: yazar, başlık, yayıncı, şehir… (ör. grev, Koç Y, &quot;sosyal güvenlik&quot;)" aria-label="Kaynakçada ara">
+      <button class="clr" id="clr" aria-label="Aramayı temizle">×</button>
+    </div>
+    <select id="field" aria-label="Aranacak alan">
+      <option value="all">Tüm alanlar</option>
+      <option value="yazar">Yazar / kurum</option>
+      <option value="baslik">Başlık</option>
+      <option value="yayinci">Yayıncı</option>
+      <option value="sehir">Şehir</option>
+    </select>
+    <div class="hint">Türkçe karakter duyarsız (<code>isci</code> = <code>işçi</code>). Tırnak içi tam ifade: <code>"toplu iş sözleşmesi"</code> · Yazar: <code>"Koç Y"</code> · Hariç tut: <code>-tüzük</code> · Yıl: <code>1963</code> veya <code>1960..1970</code>
+      <button class="iconbtn filtersToggle" id="ftog" aria-expanded="false" style="margin-left:8px">Filtreler</button></div>
+  </div>
+</div>
+
+<main class="wrap layout">
+  <aside id="aside" aria-label="Filtreler">
+    <h3>Harf</h3>
+    <div class="letters" id="letters"></div>
+    <h3>Yayın türü</h3>
+    <div class="facet" id="f_tur"></div>
+    <h3>Yazar</h3>
+    <div class="facet" id="f_yazar_turu"></div>
+    <h3>Dil</h3>
+    <div class="facet" id="f_dil"></div>
+    <h3>Diğer</h3>
+    <div class="facet">
+      <label><input type="checkbox" id="f_cog"> Yalnız çoğaltmalar <span class="n" id="n_cog"></span></label>
+      <label><input type="checkbox" id="f_ty"> Yalnız tarihsiz <span class="n" id="n_ty"></span></label>
+    </div>
+    <h3>Yıl aralığı</h3>
+    <div class="yr"><input type="number" id="y1" placeholder="1900" aria-label="Başlangıç yılı"> – <input type="number" id="y2" placeholder="2004" aria-label="Bitiş yılı"></div>
+    <svg id="hist" role="img" aria-label="Sonuçların yıllara dağılımı"></svg>
+    <h3>Sıralama</h3>
+    <select id="sort" style="width:100%">
+      <option value="orig">Kaynakça sırası (alfabetik)</option>
+      <option value="ya">Yıl (eskiden yeniye)</option>
+      <option value="yd">Yıl (yeniden eskiye)</option>
+      <option value="t">Başlık (A–Z)</option>
+    </select>
+    <button class="iconbtn reset" id="reset">Tüm filtreleri sıfırla</button>
+  </aside>
+
+  <section aria-live="polite">
+    <div class="meta">
+      <div class="count" id="count"></div>
+      <div class="tools">
+        <button class="btn ghost" id="copyAll">APA'ları kopyala</button>
+        <button class="btn ghost" id="expCsv">CSV indir</button>
+        <button class="btn ghost" id="expRis">RIS indir</button>
+        <button class="btn" id="expTxt">APA kaynakça (.txt)</button>
+      </div>
+    </div>
+    <ol class="results" id="results"></ol>
+    <nav class="pager" id="pager" aria-label="Sayfalar"></nav>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    Kaynak: Koç, C., &amp; Koç, Y. (2004). <i>Türkiye çalışma yaşamı kaynakçası</i>. Sendika.Org.
+    <a href="https://sendika.org/2006/03/turkiye-calisma-yasami-kaynakcasi-sunus/" rel="noopener">Sunuş</a> ·
+    <a href="https://sendika.org/wp-content/uploads/2015/05/1324174914b.pdf" rel="noopener">PDF</a>.
+    APA 7 künyeleri özgün kayıtlardan otomatik üretilmiştir; alıntılamadan önce "Özgün kayıt" alanıyla karşılaştırın.
+    <span id="build"></span>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="data/data.js"></script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// ---------- tema ----------
+try{const t=localStorage.getItem("ktheme"); if(t) document.documentElement.dataset.theme=t;}catch(e){}
+$("theme").onclick=()=>{
+  const cur=document.documentElement.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  const nx=cur==="dark"?"light":"dark"; document.documentElement.dataset.theme=nx;
+  try{localStorage.setItem("ktheme",nx);}catch(e){}
+};
+
+// ---------- veri ----------
+async function loadData(){
+  if(window.KAYNAKCA) return window.KAYNAKCA;
+  const r=await fetch("data/kaynakca.json"); return r.json();
+}
+
+// Türkçe duyarsız katlama (Python fold() ile aynı)
+const fold=s=>String(s||"").replace(/İ/g,"i").replace(/I/g,"ı").toLowerCase().replace(/ı/g,"i")
+  .normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/\s+/g," ").trim();
+
+// katlanmış metinde bulunan konumları özgün metne eşlemek için karakter-karakter katlama haritası
+function foldMap(s){
+  let out="", map=[];
+  for(let i=0;i<s.length;i++){
+    const f=fold(s[i])||(/\s/.test(s[i])?" ":"");
+    for(const c of f){out+=c;map.push(i);}
+  }
+  return {out,map};
+}
+function highlight(text,terms){
+  if(!terms.length||!text) return esc(text);
+  const fm=foldMap(text);
+  const out=fm.out.replace(/[^a-z0-9]/g," "), map=fm.map;
+  const marks=new Array(text.length).fill(false);
+  for(const t of terms){
+    if(!t) continue;
+    // çok kelimeli ifadede kelimeler arası noktalama/boşluk farkını tolere et
+    const rx=new RegExp("(^|[^a-z0-9])("+t.split(" ").map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("[^a-z0-9]+")+")","g");
+    let m;
+    while((m=rx.exec(out))){
+      const st=m.index+m[1].length, en=st+m[2].length;
+      for(let k=st;k<en&&k<map.length;k++) marks[map[k]]=true;
+      if(rx.lastIndex===m.index) rx.lastIndex++;
+    }
+  }
+  let h="",on=false;
+  for(let i=0;i<text.length;i++){
+    if(marks[i]&&!on){h+="<mark>";on=true;}
+    if(!marks[i]&&on){h+="</mark>";on=false;}
+    h+=esc(text[i]);
+  }
+  return h+(on?"</mark>":"");
+}
+
+// kelime-başı araması için: katla, harf/rakam dışını boşluğa çevir, başa boşluk koy
+const W=s=>" "+fold(s).replace(/[^a-z0-9]+/g," ").trim()+" ";
+const WT=s=>fold(s).replace(/[^a-z0-9]+/g," ").trim();
+const LETTERS="A B C Ç D E F G H I İ J K L M N O Ö P Q R S Ş T U Ü V W Y Z".split(" ");
+const DIL={tr:"Türkçe",en:"İngilizce",de:"Almanca",fr:"Fransızca"};
+let R=[], F={};   // kayıtlar ve alan indeksleri
+const PER=50;
+const state={q:"",field:"all",harf:"",tur:new Set(),yt:new Set(),dil:new Set(),cog:false,ty:false,y1:"",y2:"",sort:"orig",page:1};
+
+function prep(D){
+  const A=D.alanlar; A.forEach((a,i)=>F[a]=i);
+  R=D.kayitlar.map(x=>{
+    const o={}; A.forEach((a,i)=>o[a]=x[i]);
+    o.yn=parseInt(o.yil,10); if(isNaN(o.yn)) o.yn=null;
+    o.f={yazar:W(o.yazar),baslik:W(o.baslik),yayinci:W(o.yayinci),sehir:W(o.sehir)};
+    o.f.all=W([o.yazar,o.baslik,o.yayinci,o.sehir,o.yil,o.tez_turu,o.notlar,o.ham_kayit].join(" "));
+    o.cog=/çoğaltma/i.test(o.notlar);
+    o.ty=!o.yn;
+    return o;
+  });
+}
+
+// ---------- sorgu çözümleme ----------
+function parseQuery(q){
+  const inc=[],exc=[]; let yr=null;
+  const re=/(-?)"([^"]+)"|(-?)(\S+)/g; let m;
+  while((m=re.exec(q))){
+    const neg=(m[1]||m[3])==="-"; let t=m[2]||m[4];
+    const yrm=!m[2]&&t.match(/^(\d{4})(?:\.\.|-)(\d{4})$/);
+    if(yrm&&!neg){yr=[+yrm[1],+yrm[2]];continue;}
+    t=WT(t);
+    if(!t) continue;
+    (neg?exc:inc).push(t);
+  }
+  return {inc,exc,yr};
+}
+
+function filterAll(){
+  const {inc,exc,yr}=parseQuery(state.q);
+  const key=state.field;
+  const y1=state.y1?+state.y1:(yr?yr[0]:null), y2=state.y2?+state.y2:(yr?yr[1]:null);
+  const base=R.filter(o=>{
+    const hay=o.f[key];
+    for(const t of inc) if(!hay.includes(" "+t)) return false;
+    for(const t of exc) if(hay.includes(" "+t)) return false;
+    if(y1!=null && (o.yn==null||o.yn<y1)) return false;
+    if(y2!=null && (o.yn==null||o.yn>y2)) return false;
+    return true;
+  });
+  // yüz sayıları: her yüz kendi filtresi hariç diğerleriyle hesaplanır
+  const pass=(o,skip)=>{
+    if(skip!=="harf"&&state.harf&&o.harf!==state.harf) return false;
+    if(skip!=="tur"&&state.tur.size&&!state.tur.has(o.tur)) return false;
+    if(skip!=="yt"&&state.yt.size&&!state.yt.has(o.yazar_turu)) return false;
+    if(skip!=="dil"&&state.dil.size&&!state.dil.has(o.dil)) return false;
+    if(skip!=="cog"&&state.cog&&!o.cog) return false;
+    if(skip!=="ty"&&state.ty&&!o.ty) return false;
+    return true;
+  };
+  const counts={harf:{},tur:{},yt:{},dil:{},cog:0,ty:0};
+  for(const o of base){
+    if(pass(o,"harf")) counts.harf[o.harf]=(counts.harf[o.harf]||0)+1;
+    if(pass(o,"tur")) counts.tur[o.tur]=(counts.tur[o.tur]||0)+1;
+    if(pass(o,"yt")) counts.yt[o.yazar_turu]=(counts.yt[o.yazar_turu]||0)+1;
+    if(pass(o,"dil")) counts.dil[o.dil]=(counts.dil[o.dil]||0)+1;
+    if(pass(o,"cog")&&o.cog) counts.cog++;
+    if(pass(o,"ty")&&o.ty) counts.ty++;
+  }
+  let res=base.filter(o=>pass(o,null));
+  const tr=new Intl.Collator("tr");
+  if(state.sort==="ya") res=res.slice().sort((a,b)=>(a.yn??9999)-(b.yn??9999)||a.id-b.id);
+  else if(state.sort==="yd") res=res.slice().sort((a,b)=>(b.yn??-1)-(a.yn??-1)||a.id-b.id);
+  else if(state.sort==="t") res=res.slice().sort((a,b)=>tr.compare(a.baslik,b.baslik));
+  return {res,counts,terms:inc};
+}
+
+// ---------- APA HTML (başlık italik) ----------
+function apaHtml(o,terms){
+  const a=o.apa7; const m=a.match(/\((?:ca\. )?\d{4}(?:-\d{2,4})?\)\. |\(t\.y\.\)\. /);
+  if(!m||!o.baslik) return highlight(a,terms);
+  const s=m.index+m[0].length, len=o.baslik.length;
+  return highlight(a.slice(0,s),terms)+"<i>"+highlight(a.slice(s,s+len),terms)+"</i>"+highlight(a.slice(s+len),terms);
+}
+
+// ---------- çizim ----------
+let last={res:[]};
+function render(){
+  const {res,counts,terms}=filterAll(); last={res,terms};
+  const pages=Math.max(1,Math.ceil(res.length/PER));
+  if(state.page>pages) state.page=pages;
+  $("count").innerHTML=`<b>${res.length.toLocaleString("tr")}</b> kayıt${res.length!==R.length?` <span style="color:var(--mute)">/ ${R.length.toLocaleString("tr")}</span>`:""}`;
+  // harfler
+  $("letters").innerHTML=`<button aria-pressed="${!state.harf}" data-h="">Tümü</button>`+
+    LETTERS.map(h=>`<button data-h="${h}" aria-pressed="${state.harf===h}" ${counts.harf[h]?"":"disabled"} title="${(counts.harf[h]||0)} kayıt">${h}</button>`).join("");
+  // yüzler
+  const facet=(el,obj,set,label)=>{
+    const keys=Object.keys(obj).sort((a,b)=>obj[b]-obj[a]);
+    for(const k of set) if(!keys.includes(k)) keys.push(k);
+    $(el).innerHTML=keys.map(k=>`<label><input type="checkbox" value="${esc(k)}" ${set.has(k)?"checked":""}> ${esc(label?label(k):k)} <span class="n">${(obj[k]||0).toLocaleString("tr")}</span></label>`).join("");
+  };
+  facet("f_tur",counts.tur,state.tur);
+  facet("f_yazar_turu",counts.yt,state.yt);
+  facet("f_dil",counts.dil,state.dil,k=>DIL[k]||k);
+  $("n_cog").textContent=counts.cog.toLocaleString("tr"); $("n_ty").textContent=counts.ty.toLocaleString("tr");
+  $("f_cog").checked=state.cog; $("f_ty").checked=state.ty;
+  hist(res);
+  // sonuçlar
+  const start=(state.page-1)*PER, slice=res.slice(start,start+PER);
+  if(!slice.length){ $("results").innerHTML=`<li class="empty">Sonuç bulunamadı. Aramayı kısaltmayı ya da filtreleri sıfırlamayı deneyin.</li>`; }
+  else $("results").innerHTML=slice.map(o=>{
+    const bd=[`<span class="b t">${esc(o.tur)}</span>`,`<span class="b">${esc(o.harf)}</span>`];
+    if(o.sehir) bd.push(`<span class="b">${esc(o.sehir)}</span>`);
+    if(o.sayfa_sayisi) bd.push(`<span class="b">${esc(o.sayfa_sayisi)} s.</span>`);
+    if(o.cog) bd.push(`<span class="b">Çoğaltma</span>`);
+    if(o.dil!=="tr") bd.push(`<span class="b">${esc(DIL[o.dil]||o.dil)}</span>`);
+    const flds=[["Yazar / kurum",o.yazar],["Yıl",o.yil],["Başlık",o.baslik],["Baskı",o.baski],["Tez",o.tez_turu],["Yayıncı",o.yayinci],["Şehir",o.sehir],["Sayfa",o.sayfa_sayisi],["Notlar",o.notlar]]
+      .filter(x=>x[1]).map(([k,v])=>`<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+    return `<li class="rec" id="k${o.id}">
+      <p class="apa">${apaHtml(o,terms)}</p>
+      <div class="badges">${bd.join("")}
+        <span class="recact"><button data-copy="${o.id}" title="APA künyesini kopyala">Kopyala</button><a href="#k${o.id}" data-perma="${o.id}" title="Bu kayda bağlantı">#${o.id}</a></span>
+      </div>
+      <details class="raw"><summary>Özgün kayıt ve alanlar</summary>
+        <p style="margin:6px 0 0">${highlight(o.ham_kayit,terms)}</p>
+        <dl class="fields">${flds}</dl>
+      </details></li>`;
+  }).join("");
+  // sayfalama
+  const pg=[]; const P=state.page;
+  const add=(n,lab=n)=>pg.push(`<button data-p="${n}" ${n===P?'aria-current="page"':""}>${lab}</button>`);
+  pg.push(`<button data-p="${P-1}" ${P<=1?"disabled":""} aria-label="Önceki">‹</button>`);
+  const win=new Set([1,pages,P-2,P-1,P,P+1,P+2].filter(n=>n>=1&&n<=pages));
+  let prev=0; [...win].sort((a,b)=>a-b).forEach(n=>{ if(n-prev>1) pg.push(`<button disabled>…</button>`); add(n); prev=n; });
+  pg.push(`<button data-p="${P+1}" ${P>=pages?"disabled":""} aria-label="Sonraki">›</button>`);
+  $("pager").innerHTML=pages>1?pg.join(""):"";
+  writeHash();
+}
+
+function hist(res){
+  const svg=$("hist"); const W=svg.clientWidth||240, H=70;
+  const lo=1900, hi=2004, bw=(hi-lo+1);
+  const bins=new Array(Math.ceil(bw/2)).fill(0);
+  for(const o of res) if(o.yn&&o.yn>=lo&&o.yn<=hi) bins[Math.floor((o.yn-lo)/2)]++;
+  const mx=Math.max(1,...bins), w=W/bins.length;
+  const bars=bins.map((v,i)=>v?`<rect x="${(i*w).toFixed(1)}" y="${(H-14-(v/mx)*(H-18)).toFixed(1)}" width="${Math.max(1,w-1).toFixed(1)}" height="${((v/mx)*(H-18)).toFixed(1)}" fill="var(--acc)" opacity=".75"><title>${lo+i*2}–${lo+i*2+1}: ${v}</title></rect>`:"").join("");
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  svg.innerHTML=bars+`<text x="0" y="${H-2}" font-size="10" fill="var(--mute)">1900</text><text x="${W/2}" y="${H-2}" font-size="10" fill="var(--mute)" text-anchor="middle">1950</text><text x="${W}" y="${H-2}" font-size="10" fill="var(--mute)" text-anchor="end">2004</text>`;
+}
+
+// ---------- URL durumu ----------
+function writeHash(){
+  const p=new URLSearchParams();
+  if(state.q)p.set("q",state.q); if(state.field!=="all")p.set("alan",state.field);
+  if(state.harf)p.set("harf",state.harf); if(state.tur.size)p.set("tur",[...state.tur].join("|"));
+  if(state.yt.size)p.set("yazar",[...state.yt].join("|")); if(state.dil.size)p.set("dil",[...state.dil].join("|"));
+  if(state.cog)p.set("cog","1"); if(state.ty)p.set("ty","1");
+  if(state.y1)p.set("y1",state.y1); if(state.y2)p.set("y2",state.y2);
+  if(state.sort!=="orig")p.set("sira",state.sort); if(state.page>1)p.set("s",state.page);
+  const h=p.toString(); const nh=h?"#"+h:" ";
+  if(location.hash.slice(1)!==h) history.replaceState(null,"",h?"#"+h:location.pathname+location.search);
+}
+function readHash(){
+  const p=new URLSearchParams(location.hash.slice(1));
+  if(/^#k\d+$/.test(location.hash)) return false;
+  state.q=p.get("q")||""; state.field=p.get("alan")||"all"; state.harf=p.get("harf")||"";
+  state.tur=new Set((p.get("tur")||"").split("|").filter(Boolean));
+  state.yt=new Set((p.get("yazar")||"").split("|").filter(Boolean));
+  state.dil=new Set((p.get("dil")||"").split("|").filter(Boolean));
+  state.cog=p.get("cog")==="1"; state.ty=p.get("ty")==="1";
+  state.y1=p.get("y1")||""; state.y2=p.get("y2")||""; state.sort=p.get("sira")||"orig"; state.page=+p.get("s")||1;
+  $("q").value=state.q; $("field").value=state.field; $("y1").value=state.y1; $("y2").value=state.y2; $("sort").value=state.sort;
+  $("clr").style.display=state.q?"block":"none";
+  return true;
+}
+
+// ---------- dışa aktarma ----------
+function download(name,text,type){
+  const b=new Blob([text],{type:type+";charset=utf-8"}); const a=document.createElement("a");
+  a.href=URL.createObjectURL(b); a.download=name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+}
+const CSVF=["id","harf","yazar","yazar_turu","yil","baslik","baski","tez_turu","yayinci","sehir","sayfa_sayisi","notlar","tur","dil","apa7","ham_kayit"];
+const csvCell=v=>{v=String(v??""); return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+function toCSV(rs){return "﻿"+CSVF.join(",")+"\n"+rs.map(o=>CSVF.map(k=>csvCell(o[k])).join(",")).join("\n");}
+function toRIS(rs){
+  return rs.map(o=>{
+    const L=[];
+    const ty=o.tur==="Tez"?"THES":(o.tur==="Rapor"?"RPRT":(o.tur==="Bildiri / Seminer"?"CONF":(o.tur==="Mevzuat"?"STAT":"BOOK")));
+    L.push("TY  - "+ty);
+    if(o.yazar_turu==="Kişi") o.yazar.replace(/\s*\((Ed|Der|Haz|Çev)\.\)$/,"").replace(/ vd\.$/,"").split("; ").forEach(a=>L.push("AU  - "+a));
+    else L.push("AU  - "+o.yazar+",");
+    if(/\((Ed|Der|Haz)\.\)$/.test(o.yazar)) L.push("N1  - Editör/Derleyen");
+    L.push("TI  - "+o.baslik);
+    if(o.yn) L.push("PY  - "+o.yn);
+    if(o.yayinci) L.push("PB  - "+o.yayinci);
+    if(o.sehir) L.push("CY  - "+o.sehir);
+    if(o.sayfa_sayisi) L.push("SP  - "+o.sayfa_sayisi);
+    if(o.baski) L.push("ET  - "+o.baski);
+    if(o.tez_turu) L.push("M3  - "+o.tez_turu);
+    if(o.notlar) L.push("N1  - "+o.notlar);
+    L.push("LA  - "+(o.dil==="tr"?"tur":o.dil==="en"?"eng":o.dil==="de"?"ger":o.dil==="fr"?"fre":o.dil));
+    L.push("N1  - Özgün kayıt: "+o.ham_kayit);
+    L.push("ID  - TCYK"+o.id);
+    L.push("ER  - ");
+    return L.join("\r\n");
+  }).join("\r\n\r\n");
+}
+const stamp=()=>new Date().toISOString().slice(0,10);
+$("expCsv").onclick=()=>download(`kaynakca_secim_${stamp()}.csv`,toCSV(last.res),"text/csv");
+$("expRis").onclick=()=>download(`kaynakca_secim_${stamp()}.ris`,toRIS(last.res),"application/x-research-info-systems");
+$("expTxt").onclick=()=>{
+  const tr=new Intl.Collator("tr");
+  const lines=last.res.map(o=>o.apa7).sort(tr.compare);
+  download(`kaynakca_apa7_${stamp()}.txt`,lines.join("\n\n")+"\n","text/plain");
+};
+async function copy(t,msg){
+  try{await navigator.clipboard.writeText(t);}catch(e){const ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");}catch(_){ } ta.remove();}
+  toast(msg);
+}
+$("copyAll").onclick=()=>{
+  const n=Math.min(last.res.length,2000);
+  copy(last.res.slice(0,n).map(o=>o.apa7).join("\n"),`${n.toLocaleString("tr")} künye kopyalandı${last.res.length>n?" (ilk 2000)":""}`);
+};
+let tt; function toast(m){const e=$("toast");e.textContent=m;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),1800);}
+
+// ---------- olaylar ----------
+let deb;
+$("q").addEventListener("input",e=>{ $("clr").style.display=e.target.value?"block":"none"; clearTimeout(deb); deb=setTimeout(()=>{state.q=e.target.value;state.page=1;render();},140); });
+$("clr").onclick=()=>{ $("q").value="";state.q="";state.page=1;$("clr").style.display="none";render();$("q").focus(); };
+$("field").onchange=e=>{state.field=e.target.value;state.page=1;render();};
+$("sort").onchange=e=>{state.sort=e.target.value;state.page=1;render();};
+$("y1").onchange=e=>{state.y1=e.target.value;state.page=1;render();};
+$("y2").onchange=e=>{state.y2=e.target.value;state.page=1;render();};
+$("f_cog").onchange=e=>{state.cog=e.target.checked;state.page=1;render();};
+$("f_ty").onchange=e=>{state.ty=e.target.checked;state.page=1;render();};
+$("letters").onclick=e=>{const b=e.target.closest("button[data-h]"); if(!b||b.disabled) return; state.harf=b.dataset.h; state.page=1; render();};
+const facetEv=(el,set)=>$(el).addEventListener("change",e=>{const v=e.target.value; e.target.checked?set().add(v):set().delete(v); state.page=1; render();});
+facetEv("f_tur",()=>state.tur); facetEv("f_yazar_turu",()=>state.yt); facetEv("f_dil",()=>state.dil);
+$("pager").onclick=e=>{const b=e.target.closest("button[data-p]"); if(!b||b.disabled) return; state.page=+b.dataset.p; render(); window.scrollTo({top:0,behavior:"smooth"});};
+$("results").onclick=e=>{
+  const c=e.target.closest("[data-copy]"); if(c){const o=R[+c.dataset.copy-1]; copy(o.apa7,"APA künyesi kopyalandı");}
+};
+$("reset").onclick=()=>{location.hash="";readHash();state.page=1;render();};
+$("ftog").onclick=()=>{const a=$("aside");a.classList.toggle("open");$("ftog").setAttribute("aria-expanded",a.classList.contains("open"));};
+window.addEventListener("hashchange",()=>{ if(/^#k\d+$/.test(location.hash)) return; const cur=location.hash; readHash(); render(); });
+document.addEventListener("keydown",e=>{ if(e.key==="/"&&document.activeElement!==$("q")){e.preventDefault();$("q").focus();} });
+window.addEventListener("resize",()=>hist(last.res));
+
+loadData().then(D=>{
+  prep(D);
+  const perma=location.hash.match(/^#k(\d+)$/);
+  readHash();
+  if(perma){ state.q=""; const o=R[+perma[1]-1]; if(o){ state.harf=o.harf; state.page=Math.floor(R.filter(x=>x.harf===o.harf).indexOf(o)/PER)+1; } }
+  render();
+  if(perma){ const el=document.getElementById("k"+perma[1]); if(el){el.scrollIntoView({block:"center"}); el.style.outline="2px solid var(--acc)";} }
+  $("build").textContent=` · ${R.length.toLocaleString("tr")} kayıt.`;
+}).catch(err=>{$("results").innerHTML=`<li class="empty">Veri yüklenemedi: ${esc(err.message)}</li>`;});
+})();
+</script>
+</body>
+</html>

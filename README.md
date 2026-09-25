@@ -2,8 +2,6 @@
 
 Canan Koç ve Yıldırım Koç'un derlediği **Türkiye Çalışma Yaşamı Kaynakçası**'nın (Ekim 2004; sendika.org'da harf harf yayımlanmıştır) aranabilir ve APA 7 biçimli sürümü. Sendika yayınları, çalışma raporları, tüzükler, mevzuat, tezler, anılar ve işçi edebiyatı gibi on binlerce kaydı kapsar.
 
-Sunucu gerektirmez: tek bir `index.html` ve statik veri dosyalarından oluşur. GitHub Pages'te doğrudan yayımlanabilir; `index.html` dosyasına çift tıklayarak çevrimdışı da açılabilir.
-
 ## Özellikler
 
 - **Türkçe karakter duyarsız arama.** `isci` yazınca `işçi`, `sendikasi` yazınca `Sendikası` bulunur. Eşleşme kelime başından yapılır.
@@ -70,37 +68,7 @@ scripts/
 - Baskı: `(3. bs.)`. Tez: `[Doktora tezi, Kurum]`. Çoğaltmalar: `[Çoğaltma]`.
 - APA 7'de yer bilgisi ve sayfa sayısı kitap künyesine girmez; bunlar CSV'de ayrı sütunlarda tutulur.
 
-**Uyarı:** Künyeler 10.000'i aşkın serbest biçimli kayıttan kural tabanlı olarak üretilmiştir. Kaynakçanın kendi yazımındaki tutarsızlıklar (eksik virgüller, yarım kalmış satırlar, yazar–başlık sınırının belirsiz olduğu kayıtlar) bazı künyelerde hataya yol açabilir. Bir künyeyi yayında kullanmadan önce özgün kayıtla karşılaştırın.
-
-## GitHub Pages'te yayımlama
-
-1. GitHub'da yeni bir depo oluşturun (ör. `calisma-yasami-kaynakcasi`).
-2. Bu klasörün içeriğini depoya yükleyin:
-   ```bash
-   git init
-   git add .
-   git commit -m "Türkiye Çalışma Yaşamı Kaynakçası arama motoru"
-   git branch -M main
-   git remote add origin https://github.com/KULLANICI/calisma-yasami-kaynakcasi.git
-   git push -u origin main
-   ```
-   Web arayüzünden yüklemek isterseniz: **Add file → Upload files**. Klasörleri sürükleyip bırakabilirsiniz; tek dosya 25 MB sınırının altında kalır.
-3. **Settings → Pages → Build and deployment** bölümünde *Source: Deploy from a branch* seçin, dal olarak *main* ve klasör olarak */ (root)* belirleyip kaydedin.
-4. Bir iki dakika sonra site `https://KULLANICI.github.io/calisma-yasami-kaynakcasi/` adresinde yayında olur.
-
-## Veriyi güncelleme / yeniden üretme
-
-```bash
-python3 scripts/fetch_sendika.py        # 30 harf sayfasını indirir → data/kaynak_metin/
-python3 scripts/parse_to_apa.py         # → data/kaynakca_apa7.csv, kaynakca.json, data.js
-```
-
-Yalnızca belirli harfler için: `python3 scripts/fetch_sendika.py --harf Ç İ Ö Ş Ü`.
-Tarayıcıdan kaydedilmiş sayfalar için: `--html-dir KLASÖR`. Dosya adları `04_Ç.html` biçiminde olmalıdır.
-
-Betikler yalnızca Python standart kütüphanesini kullanır.
-
-**Adres notu:** Türkçe harfli sayfaların sitedeki adresleri sonda sayısal bir kimlik taşır: Ç `…-c-2-6530`, İ `…-i-2-6537`, Ö `…-o-2-6544`, Ş `…-s-2-6549`, Ü `…-u-2-6552`. Sunuş sayfasındaki eski bağlantılar (`…-c-2/` vb.) 404 hatası verir.
+**Uyarı:** Künyeler 10.000'i aşkın serbest biçimli kayıttan kural tabanlı olarak üretilmiştir. Kaynakçanın kendi yazımındaki tutarsızlıklar (eksik virgüller, yarım kalmış satırlar, yazar–başlık sınırının belirsiz olduğu kayıtlar) bazı künyelerde hataya yol açabilir. 
 
 ## Kaynak ve haklar
 
